@@ -1,0 +1,29 @@
+import sys, random
+LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+def translate(key, message, mode):
+    result = ''
+    charsA = LETTERS
+    charsB = key
+    if mode == 'decrypt':
+        charsA, charsB = charsB, charsA
+    for i in message:
+        if i.upper() in charsA:
+            symIndex = charsA.find(i.upper())
+            if i.isupper():
+                result += charsB[symIndex].upper()
+            else:
+                result += charsB[symIndex].lower()
+        else:
+            result += i
+    return result
+text=input("Enter a plain text :-")
+for i in range(len(text)):
+    if ((text[i].isalpha())==0 and text[i]!=' '):
+        print("Please Enter a String!")
+        sys.exit()
+Key = 'ZYXWVUTSRQPONMLKJIHGFEDCBA'
+result = translate(Key,text ,'encrypt')
+print("\nKey is :-%s" % (Key))
+print("\nCipher Text :  is",result)
+result=translate(Key,result ,'decrypt')
+print("\nPlain text :",result)
